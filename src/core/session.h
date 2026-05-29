@@ -30,6 +30,10 @@ public:
     void setRemoteUrl(const std::string& url);
     bool isRemoteMode() const;
 
+    // When true, skip the copyCapture step and use the path directly as
+    // the remote path (file is already on the remote device). For Android.
+    void setRemoteOpenDirect(bool direct) { m_remoteOpenDirect = direct; }
+
     // Internal accessors for other core modules.
     // Convention: mcp/cli layers should NOT call these directly.
     IReplayController* controller() const;
@@ -60,6 +64,7 @@ private:
     std::string m_remoteUrl;
     std::string m_remotePath;
     bool m_isRemote = false;
+    bool m_remoteOpenDirect = false;
 };
 
 } // namespace renderdoc::core

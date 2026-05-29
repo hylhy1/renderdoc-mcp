@@ -35,6 +35,7 @@ McpServer::McpServer() {
     tools::registerDiffTools(*m_registry);
     tools::registerPassTools(*m_registry);
     tools::registerCounterTools(*m_registry);
+    tools::registerAndroidTools(*m_registry);
     tools::registerCBufferTools(*m_registry);
 }
 

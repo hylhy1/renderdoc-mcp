@@ -71,11 +71,16 @@ CaptureInfo Session::open(const std::string& path) {
         // ── Remote replay path ──────────────────────────────────────
         m_remote.connect(m_remoteUrl);
 
-        // Upload capture file to remote server
-        m_remotePath = m_remote.copyCapture(path);
-
-        // Open capture on the remote server — returns same IReplayController* interface
-        m_controller = m_remote.openCapture(m_remotePath);
+        if (m_remoteOpenDirect || (!path.empty() && path[0] == '/')) {
+            // File is already on the remote device (Android-style path) —
+            // skip copy and open directly
+            m_remotePath = path;
+            m_controller = m_remote.openCaptureDirect(m_remotePath);
+        } else {
+            // Upload capture file to remote server
+            m_remotePath = m_remote.copyCapture(path);
+            m_controller = m_remote.openCapture(m_remotePath);
+        }
         m_isRemote = true;
         m_capturePath = path;
 

@@ -53,6 +53,11 @@ public:
     /// Safe to call with nullptr.
     void closeCapture(IReplayController* ctrl);
 
+    /// Open a capture directly on the remote server without copying first.
+    /// Use this when the file is already on the remote device (e.g., Android).
+    /// The remotePath is the path ON the remote device (e.g., /sdcard/capture.rdc).
+    IReplayController* openCaptureDirect(const std::string& remotePath);
+
 private:
     void startPing();
     void stopPing();

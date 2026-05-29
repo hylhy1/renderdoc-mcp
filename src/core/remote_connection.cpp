@@ -99,6 +99,28 @@ void RemoteConnection::closeCapture(IReplayController* ctrl) {
     }
 }
 
+IReplayController* RemoteConnection::openCaptureDirect(const std::string& remotePath) {
+    if (!m_server)
+        throw CoreError(CoreError::Code::RemoteConnectionFailed, "Not connected to remote server");
+
+    ReplayOptions opts;
+    auto [status, controller] = m_server->OpenCapture(
+        ~0U,
+        rdcstr(remotePath.c_str()),
+        opts,
+        nullptr
+    );
+
+    if (!status.OK() || !controller) {
+        throw CoreError(CoreError::Code::ReplayInitFailed,
+                        "Failed to open remote capture: " +
+                        std::string(status.Message().c_str()));
+    }
+
+    std::fprintf(stderr, "[renderdoc-mcp] Remote capture opened: %s\n", remotePath.c_str());
+    return controller;
+}
+
 void RemoteConnection::startPing() {
     stopPing(); // Ensure no existing ping thread
     m_pingRunning = true;

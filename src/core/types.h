@@ -535,4 +535,39 @@ struct CBufferContents {
     std::vector<ShaderVar> variables;
 };
 
+// --- Android / ADB ---
+
+struct AndroidDeviceInfo {
+    std::string serial;         // e.g., "emulator-5554" or "ABC123"
+    std::string model;          // e.g., "Pixel 7"
+    std::string product;        // e.g., "panther"
+    std::string device;         // device codename
+    std::string androidVersion; // e.g., "14"
+    std::string status;         // "device", "offline", "unauthorized"
+    bool isAuthorized = false;
+};
+
+struct AndroidCaptureRequest {
+    std::string deviceSerial;   // ADB device serial (required)
+    std::string packageName;    // Android app package name (required)
+    std::string activityName;   // Optional: specific activity to launch
+    uint32_t delayFrames = 100; // Frames to wait before capture
+    std::string captureFilePath;// Optional: remote path to save capture on device
+    std::string outputPath;     // Local path for pulled .rdc file
+};
+
+struct AndroidCaptureResult {
+    std::string capturePath;    // Local path to the pulled .rdc file
+    std::string deviceSerial;
+    std::string packageName;
+    bool opened = false;        // Whether the file was auto-opened for replay
+};
+
+struct AndroidRemoteServerResult {
+    std::string deviceSerial;
+    int localPort = 0;          // The local port after adb forward
+    int remotePort = 39920;     // The remote port on the device
+    std::string connectionUrl;  // "localhost:<localPort>" — ready for RemoteConnection
+};
+
 } // namespace renderdoc::core

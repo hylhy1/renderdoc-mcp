@@ -53,6 +53,7 @@ if(RENDERDOC_DIR)
         src/core/pass_analysis.cpp
         src/core/counters.cpp
         src/core/cbuffer.cpp
+        src/core/android.cpp
         src/core/remote_connection.cpp
     )
     target_include_directories(renderdoc-core PUBLIC
@@ -125,6 +126,7 @@ if(RENDERDOC_DIR)
         src/mcp/tools/diff_tools.cpp
         src/mcp/tools/pass_tools.cpp
         src/mcp/tools/counter_tools.cpp
+        src/mcp/tools/android_tools.cpp
         src/mcp/tools/cbuffer_tools.cpp
     )
     target_link_libraries(renderdoc-mcp-lib PUBLIC renderdoc-mcp-proto renderdoc-core)

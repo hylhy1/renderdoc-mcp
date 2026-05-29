@@ -24,6 +24,7 @@ void registerAssertionTools(ToolRegistry& registry);
 void registerDiffTools(ToolRegistry& registry);
 void registerPassTools(ToolRegistry& registry);
 void registerCounterTools(ToolRegistry& registry);
+void registerAndroidTools(ToolRegistry& registry);
 void registerCBufferTools(ToolRegistry& registry);
 
 } // namespace renderdoc::mcp::tools

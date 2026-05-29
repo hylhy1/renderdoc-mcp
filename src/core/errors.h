@@ -32,7 +32,16 @@ public:
         DiffAlreadyOpen,
         DiffAlignmentFailed,
         MarkerNotFound,
-        RemoteConnectionFailed
+        RemoteConnectionFailed,
+        AdbNotFound,
+        AdbDeviceNotConnected,
+        AdbOperationFailed,
+        AndroidProvisionFailed,
+        AndroidStartAppFailed,
+        AndroidCaptureFailed,
+        AndroidPullFailed,
+        AndroidPushFailed,
+        AndroidRemoteServerFailed
     };
 
     CoreError(Code code, const std::string& message)
